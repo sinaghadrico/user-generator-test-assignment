@@ -1,22 +1,20 @@
 interface UserInfoProps {
-  label: string;
-  value: string;
-  isChanged: boolean;
+    label: string;
+    value: string;
+    isChanged: boolean;
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({ label, value, isChanged }) => (
-  <div className={`mb-2 flex  flex-row gap-2 items-center`}>
-    <span className=" text-gray-400 ">{label}:</span>{" "}
-    <span
-      className={`${
-        isChanged
-          ? " text-yellow-200 underline transition-all duration-300"
-          : " text-black"
-      }`}
-    >
-      {value}
-    </span>
-  </div>
+    <div className="p-3 text-center">
+        <span className="text-xl font-bold block  tracking-wide text-slate-700">{label}</span>
+        <span
+            className={` text-sm  text-slate-40  ${
+                isChanged ? 'underline transition-all duration-300 bg-highlight' : ''
+            }`}
+        >
+            {value}
+        </span>
+    </div>
 );
 
 export default UserInfo;
