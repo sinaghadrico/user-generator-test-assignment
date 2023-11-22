@@ -5,9 +5,11 @@ import userMapper from "mapper/userMapper";
 
 const useUser = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const prevUserDataRef = useRef<UserData | null>(null);
 
   const fetchRandomUser = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(baseApiUrl);
 
@@ -27,6 +29,10 @@ const useUser = () => {
     } catch (error) {
       console.error("Error fetching random user");
     }
+    finally {
+        setIsLoading(false);
+    }
+
   }, [userData]);
 
   useEffect(() => {
@@ -45,6 +51,7 @@ const useUser = () => {
   );
 
   return {
+    isLoading,
     userData,
     fetchRandomUser,
     isFieldChanged,

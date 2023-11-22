@@ -1,9 +1,10 @@
 import UserInfo from 'components/UserInfo';
 import UserImage from 'components/UserImage';
 import useUser from 'hooks/useUser';
+import ActionButton from 'components/ActionButton';
 
 const UserProfile: React.FC = () => {
-    const { userData, fetchRandomUser, isFieldChanged } = useUser();
+    const { userData, isLoading, fetchRandomUser, isFieldChanged } = useUser();
     return (
         <div className="relative max-w-md md:max-w-2xl h-fit min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-16">
             <div className="px-6">
@@ -32,16 +33,9 @@ const UserProfile: React.FC = () => {
                     </div>
                 </div>
                 <div className="mt-6 py-6 border-t border-slate-200 text-center">
-                    <div className="flex flex-wrap justify-center">
-                        <div className="w-full px-4">
-                            <button
-                                onClick={fetchRandomUser}
-                                className=" text-white hover:text-black font-bold py-2 px-4 rounded-lg bg-black hover:bg-transparent border-2 border-black "
-                            >
-                                Generate New User
-                            </button>
-                        </div>
-                    </div>
+                    <ActionButton onClick={fetchRandomUser} disabled={isLoading}>
+                        {isLoading ? 'Loading...' : 'Generate New User'}
+                    </ActionButton>
                 </div>
             </div>
         </div>
