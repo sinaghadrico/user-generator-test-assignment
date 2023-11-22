@@ -14,7 +14,7 @@ App to generate user
 
 **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/user-generator-test-assignment.git
+   git clone git@github.com:sinaghadrico/user-generator-test-assignment.git
    cd user-generator-test-assignment
  ```
 
