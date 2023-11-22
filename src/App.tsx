@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import UserInfo from "components/UserInfo";
+import UserImage from "components/UserImage";
+import useUser from "hooks/useUser";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const { userData, fetchRandomUser, isFieldChanged } = useUser();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="flex flex-col  w-full max-w-md p-5  mx-auto mt-8 bg-slate-700 rounded-lg">
+      <h1 className="text-2xl text-white text-center font-bold mb-4">
+        User Profile Genarator
+      </h1>
+      {userData && (
+        <div className="flex gap-5 items-center">
+          <UserImage src={userData.image} />
+          <div className="flex flex-col">
+            <UserInfo
+              label="First Name"
+              value={userData.firstName}
+              isChanged={!!isFieldChanged("firstName")}
+            />
+            <UserInfo
+              label="Last Name"
+              value={userData.lastName}
+              isChanged={!!isFieldChanged("lastName")}
+            />
+            <UserInfo
+              label="Country"
+              value={userData.country}
+              isChanged={!!isFieldChanged("country")}
+            />
+          </div>
+        </div>
+      )}
+      <button
+        className=" bg-yellow-300 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg mt-4"
+        onClick={fetchRandomUser}
+      >
+        Get New User
+      </button>
+    </div>
+  );
+};
 
-export default App
+export default App;
